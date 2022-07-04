@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the News for the user.
+     */
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
 }

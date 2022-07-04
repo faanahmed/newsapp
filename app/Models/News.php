@@ -10,4 +10,12 @@ class News extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'content'];
+
+    /**
+     * Get the news that owns by user.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
