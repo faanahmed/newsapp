@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewsCreated;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::all();
+        
         return $news;
     }
 
@@ -39,9 +41,13 @@ class NewsController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'user_id' => 'required',
         ]);
 
-        $show = News::create($validatedData);
+        $news = News::create($validatedData);
+
+        //Firing the news event
+        NewsCreated::dispatch($news);
     }
 
     /**

@@ -9,7 +9,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'user_id'];
 
     /**
      * Get the news that owns by user.
