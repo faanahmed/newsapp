@@ -16,7 +16,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::all();
-        
+
         return $news;
     }
 
@@ -48,6 +48,8 @@ class NewsController extends Controller
 
         //Firing the news event
         NewsCreated::dispatch($news);
+
+        return $news->toJson();
     }
 
     /**
@@ -58,7 +60,9 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        $news = News::findOrFail($news);
+
+        return $news->toJson();
     }
 
     /**
@@ -103,6 +107,6 @@ class NewsController extends Controller
     {
         $news->delete();
 
-        return redirect('/news')->with('success', 'News successfully deleted');
+        return 0;
     }
 }
